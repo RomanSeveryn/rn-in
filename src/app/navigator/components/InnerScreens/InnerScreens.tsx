@@ -19,7 +19,7 @@ export const InnerScreens = () => {
           key={i}
           name={route.name}
           component={route.component}
-          options={route.options}
+          options={route.options || { headerShown: false }}
         />
       ))}
     </Stack.Navigator>
