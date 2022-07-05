@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { UserCardType } from '../types';
 
 const windowWidth = (Dimensions.get('window').width * 43.5) / 100;
 const windowHeight = (Dimensions.get('window').height * 35) / 100;
@@ -18,7 +19,7 @@ export const UserCard = ({
   onDeleteUser,
   userPhoto,
   buttonName,
-}: any) => {
+}: UserCardType) => {
   return (
     <>
       <View style={styles.container}>
@@ -26,7 +27,10 @@ export const UserCard = ({
           style={styles.imageHeader}
           source={require('../../../assets/image/background_user_card.png')}
         />
-        <TouchableOpacity onPress={onDeleteUser} style={styles.buttonDelete}>
+        <TouchableOpacity
+          onPress={() => onDeleteUser}
+          style={styles.buttonDelete}
+        >
           <Text>{buttonName}</Text>
         </TouchableOpacity>
         <Image style={styles.imagePhoto} source={{ uri: userPhoto }} />

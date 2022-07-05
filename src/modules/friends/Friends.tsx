@@ -1,43 +1,51 @@
-import React, { useState } from 'react';
-import { FlatList } from 'react-native';
-import { useQuery } from 'react-query';
-import { getUsers } from '../../api/basic';
-import { logger } from 'react-native-logs';
-import get from 'lodash/get';
+import React from 'react';
+import { FlatList, StyleSheet, TextInput, View } from 'react-native';
 import { UserCard } from './components/UserCard';
+import { useFriendContext } from '../../providers/friend/FriendProvider';
 
 export const Friends = () => {
-  let log = logger.createLogger();
-  const [users, setUsers] = useState([]);
-  useQuery('friends', () => getUsers, {
-    onSuccess: (response) => {
-      log.info('Friends.response', response);
-      const res = get(response, ['data'], []);
-      log.info('Friends.res', res);
-      setUsers(res);
-    },
-  });
+  const { filteredUsers, text, onChangeText } = useFriendContext();
 
   return (
-    <FlatList
-      data={users}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => {
-        return (
-          <UserCard
-            name={item.name}
-            lastName={item?.username}
-            userPhrase={item?.company?.catchPhrase}
-            onDeleteUser={() => console.log('123')}
-            userPhoto={`https://robohash.org/${item.name}`}
-            buttonName="X"
-          />
-        );
-      }}
-      numColumns={2}
-      style={{
-        margin: 15,
-      }}
-    />
+    <>
+      <View>
+        <TextInput
+          onChangeText={onChangeText}
+          value={text}
+          placeholder="Поиск"
+          style={styles.input}
+        />
+      </View>
+      <FlatList
+        data={filteredUsers}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => {
+          return (
+            <UserCard
+              name={item.name}
+              lastName={item?.username}
+              userPhrase={item?.company?.catchPhrase}
+              onDeleteUser={() => console.log('LOG:: onDeleteUser')}
+              userPhoto={`https://robohash.org/${item.name}`}
+              buttonName="X"
+            />
+          );
+        }}
+        numColumns={2}
+        style={styles.margin}
+      />
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  margin: {
+    margin: 15,
+  },
+});
