@@ -1,0 +1,16 @@
+export enum TabName {
+  MAIN = 'MAIN',
+  FRIENDS = 'FRIENDS',
+  PUBLICATIONS = 'PUBLICATIONS',
+  NOTIFICATIONS = 'NOTIFICATIONS',
+  VACANCIES = 'VACANCIES',
+}
+
+export enum NavigatorName {
+  TAB_NAVIGATOR = 'TAB_NAVIGATOR',
+  AUTH_NAVIGATOR = 'AUTH_NAVIGATOR',
+}
+
+export enum AuthName {
+  SIGN_UP = 'SIGN_UP',
+}
