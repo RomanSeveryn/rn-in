@@ -1,18 +1,23 @@
 import React from 'react';
-import { TabsNavigator } from '../TabsNavigator/TabsNavigator';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigatorName } from '../types';
-
-const Stack = createNativeStackNavigator();
+import { SignUp } from '../../../../modules/SignUp/SignUp';
+import { TabsNavigator } from '../TabsNavigator/TabsNavigator';
+import { AuthName, NavigatorName } from '../types';
 
 const routes: Array<any> = [
+  {
+    name: AuthName.SIGN_UP,
+    component: SignUp,
+  },
   {
     name: NavigatorName.TAB_NAVIGATOR,
     component: TabsNavigator,
   },
 ];
 
-export const InnerScreens = () => {
+const Stack = createNativeStackNavigator();
+
+export const AuthNavigator = () => {
   return (
     <Stack.Navigator>
       {routes.map((route, i) => {

@@ -2,10 +2,11 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Friends } from '../../../../modules/friends/Friends';
 import { Text } from 'react-native';
+import { TabName } from '../types';
 
 const Tabs = createBottomTabNavigator();
 
-const Feed = () => {
+export const Feed = () => {
   return (
     <>
       <Text>FEED11</Text>
@@ -15,34 +16,34 @@ const Feed = () => {
 
 const tabs: Array<any> = [
   {
-    name: 'Главная',
+    name: TabName.MAIN,
     component: Feed,
     icon: () => <Text>A</Text>,
   },
   {
-    name: 'Сеть',
+    name: TabName.FRIENDS,
     component: Friends,
     icon: () => <Text>B</Text>,
   },
   {
-    name: 'Публикация',
+    name: TabName.PUBLICATIONS,
     component: Feed,
     icon: () => <Text>C</Text>,
   },
   {
-    name: 'Уведоммления',
+    name: TabName.NOTIFICATIONS,
     component: Feed,
     icon: () => <Text>D</Text>,
   },
   {
-    name: 'Вакансии',
+    name: TabName.VACANCIES,
     component: Feed,
     icon: () => <Text>E</Text>,
   },
 ];
 
 export const TabsNavigator = () => (
-  <Tabs.Navigator initialRouteName={'Home'}>
+  <Tabs.Navigator initialRouteName={TabName.MAIN}>
     {tabs.map((tab, i) => {
       return (
         <Tabs.Screen

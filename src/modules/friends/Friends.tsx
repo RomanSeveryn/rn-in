@@ -12,7 +12,7 @@ export const Friends = () => {
         <TextInput
           onChangeText={onChangeText}
           value={text}
-          placeholder="Поиск"
+          placeholder="Search"
           style={styles.input}
         />
       </View>
@@ -23,8 +23,8 @@ export const Friends = () => {
           return (
             <UserCard
               name={item.name}
-              lastName={item?.username}
-              userPhrase={item?.company?.catchPhrase}
+              lastName={item.username}
+              userPhrase={item.company.catchPhrase}
               onDeleteUser={() => console.log('LOG:: onDeleteUser')}
               userPhoto={`https://robohash.org/${item.name}`}
               buttonName="X"
