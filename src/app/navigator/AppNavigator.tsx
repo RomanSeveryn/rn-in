@@ -1,14 +1,15 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { InnerScreens } from './components/InnerScreens/InnerScreens';
-import { FriendProvider } from '../../providers/friend/FriendProvider';
+import { useSignUpContext } from '../../providers/signUp/SignUpProviders';
+import { AuthNavigator } from './components/AuthNavigator/AuthNavigator';
 
 export const AppNavigator = () => {
+  const { isLoggedIn } = useSignUpContext();
+
   return (
     <NavigationContainer>
-      <FriendProvider>
-        <InnerScreens />
-      </FriendProvider>
+      {isLoggedIn ? <InnerScreens /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };
