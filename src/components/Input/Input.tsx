@@ -1,11 +1,19 @@
 import React from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
 
-export const InputComponent = ({ ...rest }: any) => {
+export const InputComponent = ({ error, ...rest }: any) => {
   return (
-    <View style={styles.container}>
-      <TextInput {...rest} />
-    </View>
+    <>
+      <View
+        style={
+          error
+            ? { ...styles.container, ...styles.errorContainer }
+            : styles.container
+        }
+      >
+        <TextInput placeholderTextColor={error ? 'red' : 'grey'} {...rest} />
+      </View>
+    </>
   );
 };
 
@@ -14,5 +22,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'grey',
     marginBottom: 24,
+  },
+  errorContainer: {
+    borderColor: 'red',
   },
 });

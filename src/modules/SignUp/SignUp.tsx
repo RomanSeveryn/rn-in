@@ -5,6 +5,7 @@ import { InputComponent } from '../../components/Input/Input';
 import { useSignUpContext } from '../../providers/signUp/SignUpProviders';
 import { UserType } from './hooks/types';
 import { NavigatorName, TabName } from '../../app/navigator/components/types';
+import { signUpSchema } from '../../helpers/validation-shemas';
 
 export const SignUp = ({ navigation }: any) => {
   const { initialValues, saveUser } = useSignUpContext();
@@ -20,8 +21,17 @@ export const SignUp = ({ navigation }: any) => {
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => formSubmit(values)}
+        validationSchema={signUpSchema}
+        enableReinitialize={true}
       >
-        {({ handleChange, handleBlur, handleSubmit, values }) => {
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => {
           return (
             <View style={styles.container}>
               <InputComponent
@@ -30,6 +40,7 @@ export const SignUp = ({ navigation }: any) => {
                 placeholder="name"
                 value={values.name}
                 style={styles.input}
+                error={errors.name && touched.name}
               />
               <InputComponent
                 onChangeText={handleChange('lastName')}
@@ -37,6 +48,7 @@ export const SignUp = ({ navigation }: any) => {
                 placeholder="lastName"
                 value={values.lastName}
                 style={styles.input}
+                error={errors.lastName && touched.lastName}
               />
               <InputComponent
                 onChangeText={handleChange('email')}
@@ -44,6 +56,7 @@ export const SignUp = ({ navigation }: any) => {
                 placeholder="email"
                 value={values.email}
                 style={styles.input}
+                error={errors.email && touched.email}
               />
               <InputComponent
                 onChangeText={handleChange('password')}
@@ -51,6 +64,7 @@ export const SignUp = ({ navigation }: any) => {
                 placeholder="password"
                 value={values.password}
                 style={styles.input}
+                error={errors.password && touched.password}
               />
               <Button onPress={handleSubmit} title="Join Now" />
             </View>
