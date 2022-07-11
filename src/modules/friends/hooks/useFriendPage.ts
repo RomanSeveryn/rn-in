@@ -23,5 +23,10 @@ export const useFriendPage = () => {
     user.name.toLowerCase().includes(text.toLowerCase()),
   );
 
-  return { filteredUsers, text, onChangeText };
+  const deleteUser = (id: number) => {
+    const newArrUsers = filteredUsers.filter((user) => user.id !== id);
+    setUsers(newArrUsers);
+  };
+
+  return { filteredUsers, text, onChangeText, deleteUser };
 };

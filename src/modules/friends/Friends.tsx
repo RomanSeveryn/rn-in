@@ -18,7 +18,7 @@ import {
 const windowWidth = Dimensions.get('window').width - 75;
 
 export const Friends = ({ navigation }: any) => {
-  const { filteredUsers, text, onChangeText } = useFriendContext();
+  const { filteredUsers, text, onChangeText, deleteUser } = useFriendContext();
 
   const open = () => {
     navigation.navigate(NavigatorName.PROFILE_NAVIGATOR, {
@@ -52,9 +52,9 @@ export const Friends = ({ navigation }: any) => {
               name={item.name}
               lastName={item.username}
               userPhrase={item.company.catchPhrase}
-              onDeleteUser={() => console.log('LOG:: onDeleteUser')}
+              onDeleteUser={() => deleteUser(item.id)}
               userPhoto={`https://robohash.org/${item.name}`}
-              buttonName="X"
+              buttonName="x"
             />
           );
         }}
@@ -73,6 +73,8 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     width: windowWidth,
+    backgroundColor: '#EEF3F8',
+    borderColor: 'grey',
     margin: 12,
     borderWidth: 1,
     padding: 10,
