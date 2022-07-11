@@ -14,7 +14,7 @@ export const useSignUp = () => {
   const saveUser = (values: UserType) => {
     setCurrentUser((prev) => ({
       ...prev,
-      values,
+      ...values,
     }));
   };
 

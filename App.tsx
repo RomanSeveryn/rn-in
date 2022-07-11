@@ -7,7 +7,7 @@ import { SignUpProviders } from './src/providers/signUp/SignUpProviders';
 const App = () => {
   const queryClient = new QueryClient();
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient} contextSharing={true}>
       <SignUpProviders>
         <FriendProvider>
           <AppNavigator />
