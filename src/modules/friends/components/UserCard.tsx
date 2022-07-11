@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { UserCardType } from '../types';
 
-const windowWidth = (Dimensions.get('window').width * 43.5) / 100;
-const windowHeight = (Dimensions.get('window').height * 35) / 100;
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const UserCard = ({
   name,
@@ -20,6 +20,7 @@ export const UserCard = ({
   userPhoto,
   buttonName,
 }: UserCardType) => {
+  const [addContact, setAddContact] = useState<boolean>(false);
   return (
     <>
       <View style={styles.container}>
@@ -27,18 +28,46 @@ export const UserCard = ({
           style={styles.imageHeader}
           source={require('../../../assets/image/background_user_card.png')}
         />
-        <TouchableOpacity
-          onPress={() => onDeleteUser}
-          style={styles.buttonDelete}
-        >
-          <Text>{buttonName}</Text>
+        <TouchableOpacity onPress={onDeleteUser} style={styles.buttonDelete}>
+          <Text style={styles.buttonDeleteText}>{buttonName}</Text>
         </TouchableOpacity>
         <Image style={styles.imagePhoto} source={{ uri: userPhoto }} />
-        <View>
-          <Text>{name}</Text>
-          <Text>{lastName}</Text>
+        <View style={styles.containerInfo}>
+          <Text style={styles.name} numberOfLines={1}>
+            {name} {lastName}
+          </Text>
+          <Text style={styles.phrase} numberOfLines={2}>
+            {userPhrase}
+          </Text>
+          <Text style={styles.friends} numberOfLines={1}>
+            {name.length} общих {name.length > 4 ? 'контактов' : 'контакта'}
+          </Text>
         </View>
-        <Text>{userPhrase}</Text>
+        <TouchableOpacity
+          onPress={() => setAddContact((prev) => !prev)}
+          style={
+            addContact ? styles.buttonAddContactCheck : styles.buttonAddContact
+          }
+        >
+          <Text
+            style={
+              addContact
+                ? styles.buttonAddContactTextCheck
+                : styles.buttonAddContactText
+            }
+          >
+            {addContact ? 'На' : 'Установить'}
+          </Text>
+          <Text
+            style={
+              addContact
+                ? styles.buttonAddContactTextCheck
+                : styles.buttonAddContactText
+            }
+          >
+            {addContact ? 'рассмотрении' : 'контакт'}
+          </Text>
+        </TouchableOpacity>
       </View>
     </>
   );
@@ -47,8 +76,8 @@ export const UserCard = ({
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    width: windowWidth,
-    height: windowHeight,
+    width: (windowWidth * 43.5) / 100,
+    height: (windowHeight * 38) / 100,
     margin: 5,
     alignItems: 'center',
     borderRadius: 10,
@@ -58,12 +87,14 @@ const styles = StyleSheet.create({
   },
   buttonDelete: {
     position: 'absolute',
-    padding: 4,
+    width: 24,
+    height: 24,
     top: 10,
     right: 10,
     backgroundColor: 'rgba(0,0,0, .5)',
-    borderRadius: 10,
+    borderRadius: 50,
   },
+  buttonDeleteText: { textAlign: 'center', color: 'white' },
   imagePhoto: {
     width: 70,
     height: 70,
@@ -72,8 +103,49 @@ const styles = StyleSheet.create({
   },
   imageHeader: {
     height: 55,
-    width: windowWidth + 0.25,
+    width: (windowWidth * 43.5) / 100 + 0.25,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
+  },
+  containerInfo: {
+    width: 135,
+    paddingLeft: 4,
+    paddingRight: 4,
+  },
+  name: {
+    color: 'black',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  phrase: {
+    textAlign: 'center',
+  },
+  friends: {
+    fontSize: 12,
+    textAlign: 'center',
+  },
+  buttonAddContact: {
+    borderWidth: 1,
+    borderColor: 'blue',
+    borderRadius: 50,
+    marginTop: 8,
+  },
+  buttonAddContactCheck: {
+    borderWidth: 1,
+    borderColor: 'grey',
+    borderRadius: 50,
+    marginTop: 8,
+  },
+  buttonAddContactText: {
+    color: 'blue',
+    paddingLeft: 32,
+    paddingRight: 32,
+    textAlign: 'center',
+  },
+  buttonAddContactTextCheck: {
+    color: 'grey',
+    paddingLeft: 24,
+    paddingRight: 24,
+    textAlign: 'center',
   },
 });

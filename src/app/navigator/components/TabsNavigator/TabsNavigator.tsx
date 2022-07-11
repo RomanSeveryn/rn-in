@@ -43,7 +43,7 @@ const tabs: Array<any> = [
 ];
 
 export const TabsNavigator = () => (
-  <Tabs.Navigator initialRouteName={TabName.MAIN}>
+  <Tabs.Navigator initialRouteName={TabName.FRIENDS}>
     {tabs.map((tab, i) => {
       return (
         <Tabs.Screen

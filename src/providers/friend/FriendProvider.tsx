@@ -6,6 +6,7 @@ type FriendContextType = {
   filteredUsers: Array<FriendType>;
   text: string;
   onChangeText: (e: string) => void;
+  deleteUser: (id: number) => void;
 };
 
 const FriendContext = createContext<FriendContextType>(
@@ -17,13 +18,14 @@ export const useFriendContext = () => {
 };
 
 export const FriendProvider = ({ children }: { children: React.ReactNode }) => {
-  const { filteredUsers, text, onChangeText } = useFriendPage();
+  const { filteredUsers, text, onChangeText, deleteUser } = useFriendPage();
   return (
     <FriendContext.Provider
       value={{
         filteredUsers,
         text,
         onChangeText,
+        deleteUser,
       }}
     >
       {children}

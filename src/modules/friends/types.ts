@@ -30,7 +30,7 @@ export type UserCardType = {
   name: string;
   lastName: string;
   userPhrase: string;
-  onDeleteUser: (id: number) => void;
+  onDeleteUser: () => void;
   userPhoto: string;
   buttonName: string;
 };
