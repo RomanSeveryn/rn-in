@@ -9,8 +9,13 @@ export enum TabName {
 export enum NavigatorName {
   TAB_NAVIGATOR = 'TAB_NAVIGATOR',
   AUTH_NAVIGATOR = 'AUTH_NAVIGATOR',
+  PROFILE_NAVIGATOR = 'PROFILE_NAVIGATOR',
 }
 
 export enum AuthName {
   SIGN_UP = 'SIGN_UP',
+}
+
+export enum ProfileName {
+  PROFILE_COMPONENT = 'PROFILE_COMPONENT',
 }

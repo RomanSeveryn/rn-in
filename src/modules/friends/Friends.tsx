@@ -1,14 +1,41 @@
 import React from 'react';
-import { FlatList, StyleSheet, TextInput, View } from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { UserCard } from './components/UserCard';
 import { useFriendContext } from '../../providers/friend/FriendProvider';
+import {
+  NavigatorName,
+  ProfileName,
+} from '../../app/navigator/components/types';
 
-export const Friends = () => {
+const windowWidth = Dimensions.get('window').width - 75;
+
+export const Friends = ({ navigation }: any) => {
   const { filteredUsers, text, onChangeText } = useFriendContext();
 
+  const open = () => {
+    navigation.navigate(NavigatorName.PROFILE_NAVIGATOR, {
+      screen: ProfileName.PROFILE_COMPONENT,
+    });
+  };
+
   return (
-    <>
-      <View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => open()}>
+          <Image
+            style={styles.image}
+            source={require('../../assets/image/photo.jpg')}
+          />
+        </TouchableOpacity>
+
         <TextInput
           onChangeText={onChangeText}
           value={text}
@@ -32,20 +59,30 @@ export const Friends = () => {
           );
         }}
         numColumns={2}
-        style={styles.margin}
       />
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingLeft: 12,
+    paddingRight: 12,
+    paddingBottom: 72,
+  },
   input: {
     height: 40,
+    width: windowWidth,
     margin: 12,
     borderWidth: 1,
     padding: 10,
   },
-  margin: {
-    margin: 15,
+  image: {
+    width: 30,
+    height: 30,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
