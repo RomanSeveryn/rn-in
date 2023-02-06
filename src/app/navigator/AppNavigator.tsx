@@ -9,7 +9,7 @@ export const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      {!isLoggedIn ? <InnerScreens /> : <AuthNavigator />}
+      {isLoggedIn ? <InnerScreens /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };
