@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: 300,
+    width: Platform.OS === 'ios' ? 285 : 300,
     borderWidth: 1,
     marginLeft: 12,
     padding: 10,
@@ -171,8 +172,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 24,
-    paddingRight: 24,
+    justifyContent: 'center',
   },
   buttonInteresting: {
     backgroundColor: 'blue',
